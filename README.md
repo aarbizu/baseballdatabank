@@ -32,3 +32,18 @@ http://creativecommons.org/licenses/by-sa/3.0/
     docker exec -it bb-stats /bin/bash -c "mysql stats" 
     ```
     If you want to connect to them via python or some other means, the ports are at the default setting unless you yourself modify them:  3306 for MySQL, 5432 for postgres
+
+## Node front end
+
+There's a Node/TypeScript app in the `/frontend` directory
+
+Dependencies:
+```
+node
+npm
+```
+The frontend is only set up to use postgress right now, so you'll have to select that option if you want to run the frontend app to explore the db.  
+
+### .env file
+
+There's a .env.sample that you'll probably want to customize and save as `.env` to configure ports and db connectivity.
