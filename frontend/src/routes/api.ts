@@ -32,4 +32,24 @@ export const register = ( app: express.Application ) => {
       res.json( {error: err.message || err});
     }
   });
+
+  app.post('/api/players/byname', async (req: any, res) => {
+    try {
+      const players = await db.any(
+          `SELECT
+                namegiven || ' ' || namelast as name,
+                birthyear || '-' || birthmonth || '-' || birthday as born,
+                debut,
+                finalgame
+                FROM people
+                WHERE namelast = $[lname]
+             `,
+          {...req.body},
+      );
+      return res.json( players );
+    } catch ( err ) {
+      console.error(err);
+      res.json( {error: err.message || err || req.body});
+    }
+  });
 };

@@ -19,7 +19,7 @@ app.set( 'view engine', 'ejs' );
 
 app.use( express.static( path.join( __dirname, 'public' ) ) );
 
-routes.register(app);
+routes.register( app );
 
 // start the express server
 app.listen(port, () => {

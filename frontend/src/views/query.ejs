@@ -35,7 +35,44 @@
                         </tr>
                     </tbody>
                 </table>
-                <p v-if="noPlayers">No players yet!</p>
+                <p v-if="noPlayers">No players found!</p>
+            </div>
+            <button v-on:click="getPlayers">Load some players</button>
+        </div>
+    </div>
+    <div class="container">
+        <div id="nameQuery">
+            <div class="row" id="player-name-query">
+                <h3>Player Last Name Search</h3>
+                <form class="col s6" @submit.prevent="queryPlayerName">
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="lastname" v-model="searchName" type="text" class="validate">
+                            <label for="lastname">Last Name</label>
+                        </div>
+                    </div>
+                    <button id="player-name-query-submit" class="btn" type="submit"><i class="material-icons right">send</i>Search</button>
+                </form>
+            </div>
+            <div class="row" id="player-names">
+                <table v-if="someResults">
+                    <thead>
+                        <th>name</th>
+                        <th>born</th>
+                        <th>debut</th>
+                        <th>final game</th>
+                    </thead>
+                    <tbody>
+                        <p v-if="someResults">Found {{ numResults }} matching players</p>
+                        <tr v-for="player in players">
+                            <td>{{ player.name }}</td>
+                            <td>{{ player.born }}</td>
+                            <td>{{ player.debut }}</td>
+                            <td>{{ player.finalgame }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p v-if="noResults">No players found!</p>
             </div>
         </div>
     </div>

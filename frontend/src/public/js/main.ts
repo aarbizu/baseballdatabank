@@ -40,7 +40,45 @@ new Vue( {
           });
     },
   },
+});
+
+new Vue( {
+  computed: {
+    someResults(): boolean {
+      return this.isLoading === false && this.players.length > 0;
+    },
+    noResults(): boolean {
+      return this.isLoading === false && this.players.length === 0;
+    },
+    numResults(): number {
+      return this.players.length;
+    },
+  },
+  data() {
+    return {
+      searchName: '',
+      players: [],
+      isLoading: true,
+    };
+  },
+  el: '#nameQuery',
+  methods: {
+    queryPlayerName() {
+      const playerLastName = {
+        lname: this.searchName,
+      };
+      axios
+          .post( '/api/players/byname', playerLastName )
+          .then( (res: any) => {
+            this.isLoading = false;
+            this.players = res.data;
+          })
+          .catch( (err: any) => {
+            console.log(err);
+          });
+    },
+  },
   mounted() {
-    return this.getPlayers();
+    this.$nextTick(M.updateTextFields);
   },
 });
